@@ -1,5 +1,3 @@
-import 'package:crafty_bay_app/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay_app/presentation/ui/screens/review_screen.dart';
 import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay_app/presentation/ui/widgets/custom_stepper.dart';
@@ -7,8 +5,6 @@ import 'package:crafty_bay_app/presentation/ui/widgets/home/product_image_slider
 import 'package:crafty_bay_app/presentation/ui/widgets/size_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
