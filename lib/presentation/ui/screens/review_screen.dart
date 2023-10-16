@@ -1,5 +1,5 @@
-import 'package:crafty_bay_app/presentation/ui/screens/create_review_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
+import 'create_review_screen.dart';
+import '../utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -92,7 +92,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             splashColor: Color.fromRGBO(4, 0, 226, 1),
             backgroundColor: Colors.red,
             onPressed: () {
-              Get.to(CreateReviewScreen());
+              Get.to(CreateReviewScreen() ?? " ");
             },
           )
         ],

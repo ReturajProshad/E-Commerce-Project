@@ -1,5 +1,5 @@
-import 'package:crafty_bay_app/presentation/state_holders/email_verification_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/utility/image_assets.dart';
+import '../../../state_holders/email_verification_controller.dart';
+import '../../utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -112,8 +112,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email verification failed! Try again'),
+          SnackBar(
+            content: Text(controller.message),
           ),
         );
       }

@@ -1,7 +1,7 @@
-import 'package:crafty_bay_app/presentation/state_holders/auth_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/auth/email_verification_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/main_bottom_nav_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/utility/image_assets.dart';
+import '../../state_holders/auth_controller.dart';
+import 'auth/email_verification_screen.dart';
+import 'main_bottom_nav_screen.dart';
+import '../utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

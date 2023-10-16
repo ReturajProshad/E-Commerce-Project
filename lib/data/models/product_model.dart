@@ -1,17 +1,17 @@
-import 'slider_data.dart';
+import 'product.dart';
 
-class SliderModel {
+class ProductModel {
   String? msg;
-  List<SliderData>? data;
+  List<Product>? data;
 
-  SliderModel({this.msg, this.data});
+  ProductModel({this.msg, this.data});
 
-  SliderModel.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <SliderData>[];
+      data = <Product>[];
       json['data'].forEach((v) {
-        data!.add(SliderData.fromJson(v));
+        data!.add(Product.fromJson(v));
       });
     }
   }

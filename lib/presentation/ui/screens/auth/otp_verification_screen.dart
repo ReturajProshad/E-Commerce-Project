@@ -223,6 +223,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   void resendOtp(String Email) {
     Get.snackbar("Attention !", "We Resend an otp");
-    NetworkCaller().getRequest(Urls.verifyEmail(Email));
+    NetworkCaller.getRequest(Urls.verifyEmail(Email));
   }
 }

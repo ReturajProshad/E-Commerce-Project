@@ -7,4 +7,22 @@ class Urls {
       '$_baseUrl/VerifyLogin/$email/$otp';
 
   static String getHomeSliders = '$_baseUrl/ListProductSlider';
+
+  static String getCategories = '$_baseUrl/CategoryList';
+
+  static String getProductByCategory(int categoryId) =>
+      '$_baseUrl/ListProductByCategory/$categoryId';
+
+  static String getProductsByRemarks(String remarks) =>
+      '$_baseUrl/ListProductByRemark/$remarks';
+
+  static String getProductDetails(int productId) =>
+      '$_baseUrl/ProductDetailsById/$productId';
+
+  static String addToWishlist(int productId) =>
+      '$_baseUrl/CreateWishList/$productId';
+
+  static const String addToCart = '$_baseUrl/CreateCartList';
+  static const String getWishList = '$_baseUrl/ProductWishList';
+  static const String getCartList = '$_baseUrl/CartList';
 }

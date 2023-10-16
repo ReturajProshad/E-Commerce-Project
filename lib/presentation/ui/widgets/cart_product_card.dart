@@ -1,10 +1,16 @@
-import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
-import 'package:crafty_bay_app/presentation/ui/widgets/custom_stepper.dart';
+import 'package:crafty_bay_app/data/models/cart_list_model.dart';
+import 'package:crafty_bay_app/presentation/state_holders/cart_list_controller.dart';
+import 'package:get/get.dart';
+
+import '../utility/app_colors.dart';
+import 'custom_stepper.dart';
 import 'package:flutter/material.dart';
 
 class CartProductCard extends StatelessWidget {
+  final CartData cartData;
   const CartProductCard({
     super.key,
+    required this.cartData,
   });
 
   @override
@@ -18,11 +24,10 @@ class CartProductCard extends StatelessWidget {
           Container(
             width: 100,
             height: 100,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 color: Colors.white,
                 image: DecorationImage(
-                    image: NetworkImage(
-                        'https://static.nike.com/a/images/t_default/6c350499-1796-4393-a50f-11ee2ffc154e/custom-nike-dunk-low-by-you-shoes.png'))),
+                    image: NetworkImage(cartData.product?.image ?? ''))),
           ),
           const SizedBox(
             width: 8,
@@ -40,21 +45,22 @@ class CartProductCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Bata New shoe a#sdfasdf new product',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                            Text(
+                              cartData.product?.title ?? '',
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.black),
                             ),
                             const SizedBox(
                               height: 4,
                             ),
                             RichText(
-                              text: const TextSpan(
-                                style: TextStyle(
+                              text: TextSpan(
+                                style: const TextStyle(
                                     color: Colors.black54, fontSize: 12),
                                 children: [
-                                  TextSpan(text: 'Color: Black '),
-                                  TextSpan(text: 'Size: XL'),
+                                  TextSpan(
+                                      text: 'Color: ${cartData.color ?? ''} '),
+                                  TextSpan(text: 'Size: ${cartData.size}'),
                                 ],
                               ),
                             )
@@ -69,9 +75,9 @@ class CartProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '\$100',
-                        style: TextStyle(
+                      Text(
+                        '\$${cartData.product?.price ?? ''}',
+                        style: const TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w700),
@@ -83,8 +89,11 @@ class CartProductCard extends StatelessWidget {
                             lowerLimit: 1,
                             upperLimit: 20,
                             stepValue: 1,
-                            value: 1,
-                            onChange: (int value) {},
+                            value: cartData.numberOfItems,
+                            onChange: (int value) {
+                              Get.find<CartListController>()
+                                  .changeItem(cartData.id!, value);
+                            },
                           ),
                         ),
                       )

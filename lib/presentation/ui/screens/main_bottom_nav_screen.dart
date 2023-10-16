@@ -1,10 +1,15 @@
-import 'package:crafty_bay_app/presentation/state_holders/home_slider_controller.dart';
-import 'package:crafty_bay_app/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/cart_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/category_list_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/home_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/screens/wish_list_screen.dart';
-import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
+import 'package:crafty_bay_app/presentation/state_holders/new_product_controller.dart';
+import 'package:crafty_bay_app/presentation/state_holders/popular_product_controller.dart';
+import 'package:crafty_bay_app/presentation/state_holders/special_product_controller.dart';
+
+import '../../state_holders/category_controller.dart';
+import '../../state_holders/home_slider_controller.dart';
+import '../../state_holders/main_bottom_nav_controller.dart';
+import 'cart_screen.dart';
+import 'category_list_screen.dart';
+import 'home_screen.dart';
+import 'wish_list_screen.dart';
+import '../utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +32,10 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeSlidersController>().getHomeSliders();
+      Get.find<CategoryController>().getCategories();
+      Get.find<PopularProductController>().getPopularProducts();
+      Get.find<NewProductController>().getNewProducts();
+      Get.find<SpecialProductController>().getSpecialProducts();
     });
     super.initState();
   }

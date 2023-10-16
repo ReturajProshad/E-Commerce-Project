@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:crafty_bay_app/data/models/slider_data.dart';
-import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
+import '../../../../data/models/slider_data.dart';
+import '../../utility/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeSlider extends StatefulWidget {

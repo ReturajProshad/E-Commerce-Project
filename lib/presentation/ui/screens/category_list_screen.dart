@@ -1,7 +1,11 @@
-import 'package:crafty_bay_app/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/widgets/category_card.dart';
+import 'package:crafty_bay_app/presentation/state_holders/category_controller.dart';
+
+import '../../state_holders/main_bottom_nav_controller.dart';
+import '../widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'product_list_screen.dart';
 
 class CategoryListScreen extends StatefulWidget {
   const CategoryListScreen({super.key});
@@ -36,19 +40,42 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) {
-                return const FittedBox(
-                  child: CategoryCard(),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            Get.find<CategoryController>().getCategories();
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child:
+                GetBuilder<CategoryController>(builder: (categoryController) {
+              if (categoryController.getCategoriesInProgress) {
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              }),
+              }
+              return GridView.builder(
+                itemCount: categoryController.categoryModel.data?.length ?? 0,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  return FittedBox(
+                    child: CategoryCard(
+                      categoryData:
+                          categoryController.categoryModel.data![index],
+                      onTap: () {
+                        Get.to(ProductListScreen(
+                            categoryId: categoryController
+                                .categoryModel.data![index].id!));
+                      },
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
         ),
       ),
     );
