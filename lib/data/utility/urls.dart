@@ -1,5 +1,5 @@
 class Urls {
-  static const String _baseUrl = 'https://craftybay.teamrabbil.com/api';
+  static const String _baseUrl = 'https://ecom-api.teamrabbil.com/api';
 
   static String verifyEmail(String email) => '$_baseUrl/UserLogin/$email';
 
@@ -19,10 +19,17 @@ class Urls {
   static String getProductDetails(int productId) =>
       '$_baseUrl/ProductDetailsById/$productId';
 
-  static String addToWishlist(int productId) =>
-      '$_baseUrl/CreateWishList/$productId';
-
   static const String addToCart = '$_baseUrl/CreateCartList';
-  static const String getWishList = '$_baseUrl/ProductWishList';
+
   static const String getCartList = '$_baseUrl/CartList';
+
+  static String addWishList(int id) => '$_baseUrl/CreateWishList/$id';
+
+  static String RemovefromWishList(int id) => '$_baseUrl/RemoveWishList/$id';
+
+  static const String getWishListofProduct = '$_baseUrl/ProductWishList';
+
+  static String removeFromCart(int id) => '$_baseUrl/DeleteCartList/$id';
+
+  static const String createInvoice = '$_baseUrl/InvoiceCreate';
 }

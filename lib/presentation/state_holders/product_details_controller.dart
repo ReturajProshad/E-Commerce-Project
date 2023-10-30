@@ -29,12 +29,17 @@ class ProductDetailsController extends GetxController {
         await NetworkCaller.getRequest(Urls.getProductDetails(id));
     _getProductDetailsInProgress = false;
     if (response.isSuccess) {
-      _productDetails =
-          (ProductDetailsModel.fromJson(response.responseJson ?? {}))
-              .data!
-              .first;
-      _convertStringToColor(_productDetails.color ?? '');
-      _convertStringToSizes(_productDetails.size ?? '');
+      final productDetailsModel =
+          ProductDetailsModel.fromJson(response.responseJson ?? {});
+
+      if (productDetailsModel.data != null &&
+          productDetailsModel.data!.isNotEmpty) {
+        _productDetails = productDetailsModel.data!.first;
+        _convertStringToColor(_productDetails.color ?? '');
+        _convertStringToSizes(_productDetails.size ?? '');
+      } else {
+        _errorMessage = 'No product details found in the response.';
+      }
       update();
       return true;
     } else {

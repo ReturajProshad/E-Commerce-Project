@@ -177,7 +177,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   PinCodeTextField pin_code_field(BuildContext context) {
     return PinCodeTextField(
       controller: _otpTEController,
-      length: 4,
+      length: 6,
       obscureText: false,
       animationType: AnimationType.fade,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

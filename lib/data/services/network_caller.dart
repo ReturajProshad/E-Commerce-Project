@@ -9,7 +9,6 @@ import '../../presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller {
-  /// get request method
   static Future<NetworkResponse> getRequest(String url) async {
     try {
       Response response = await get(Uri.parse(url),

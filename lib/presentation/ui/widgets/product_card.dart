@@ -1,3 +1,5 @@
+import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
+
 import '../../../data/models/product.dart';
 
 import '../utility/app_colors.dart';
@@ -8,12 +10,24 @@ import 'package:get/get.dart';
 import '../screens/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  ProductCard({
     super.key,
     required this.product,
   });
 
   final Product product;
+
+  List<int> Wlisted = ProductListController.wishlistProductIds;
+  bool iswishlisted = false;
+  void isWishlisteditem() {
+    //print(Wlisted);
+    for (int i in Wlisted) {
+      if (i == product.id) {
+        iswishlisted = true;
+        break;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +103,14 @@ class ProductCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Card(
+                        Card(
                           color: AppColors.primaryColor,
                           child: Padding(
                             padding: EdgeInsets.all(2.0),
                             child: Icon(
-                              Icons.favorite_border,
+                              iswishlisted
+                                  ? Icons.format_overline_sharp
+                                  : Icons.favorite_border,
                               size: 12,
                               color: Colors.white,
                             ),
