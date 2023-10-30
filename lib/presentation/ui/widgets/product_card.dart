@@ -3,12 +3,12 @@ import 'package:crafty_bay_app/presentation/state_holders/product_list_controlle
 import '../../../data/models/product.dart';
 
 import '../utility/app_colors.dart';
-import '../utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../screens/product_details_screen.dart';
 
+// ignore: must_be_immutable
 class ProductCard extends StatelessWidget {
   ProductCard({
     super.key,

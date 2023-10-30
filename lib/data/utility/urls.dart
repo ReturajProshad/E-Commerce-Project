@@ -32,4 +32,6 @@ class Urls {
   static String removeFromCart(int id) => '$_baseUrl/DeleteCartList/$id';
 
   static const String createInvoice = '$_baseUrl/InvoiceCreate';
+
+  static String getReviewsbyid(int id) => '$_baseUrl/ListReviewByProduct/$id';
 }

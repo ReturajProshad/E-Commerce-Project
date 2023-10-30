@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
 import 'package:crafty_bay_app/data/utility/urls.dart';
 import 'package:crafty_bay_app/presentation/state_holders/otp_verification_controller.dart';

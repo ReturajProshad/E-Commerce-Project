@@ -1,39 +1,82 @@
+import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/data/utility/urls.dart';
+
+import '../../../data/models/Review_model.dart';
 import 'create_review_screen.dart';
 import '../utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({Key? key}) : super(key: key);
+  ReviewScreen({Key? key, required this.Pid}) : super(key: key);
+  final int Pid;
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
+  late Future<List<Data>?> reviews;
+  int totalReviews = 0;
+  @override
+  void initState() {
+    super.initState();
+    reviews = fetchReviews();
+  }
+
+  Future<List<Data>?> fetchReviews() async {
+    final response =
+        await NetworkCaller.getRequest(Urls.getReviewsbyid(widget.Pid));
+    if (response.isSuccess) {
+      final reviewModel = ReviewModel.fromJson(response.responseJson ?? {});
+      setState(() {
+        totalReviews = reviewModel.data?.length ?? 0;
+      });
+      return reviewModel.data;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ReviewsAppBar,
-                    const ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Person name"),
-                      subtitle: Text("Person's review will be here"),
-                    ),
-                  ],
-                ),
-              ),
+      body: Column(
+        children: [
+          ReviewsAppBar,
+          Expanded(
+            child: FutureBuilder<List<Data>?>(
+              future: reviews,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(
+                    child: Text('No reviews available.'),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      final review = snapshot.data![index];
+                      return ListTile(
+                        leading: const Icon(Icons.person),
+                        title: Text(review.profile?.cusName ?? 'No Name'),
+                        subtitle: Text(review.description ?? 'No Review'),
+                      );
+                    },
+                  );
+                }
+              },
             ),
-            cartToCartBottomContainer,
-          ],
-        ),
+          ),
+          cartToCartBottomContainer,
+        ],
       ),
     );
   }
@@ -65,7 +108,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -79,7 +122,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 height: 4,
               ),
               Text(
-                '(1000)',
+                '($totalReviews)',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
@@ -92,7 +135,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             splashColor: Color.fromRGBO(4, 0, 226, 1),
             backgroundColor: Colors.red,
             onPressed: () {
-              Get.to(CreateReviewScreen() ?? " ");
+              Get.to(const CreateReviewScreen());
             },
           )
         ],
