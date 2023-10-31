@@ -7,9 +7,7 @@ class ThemeModeController {
   static const themeModeKey = 'theme_mode';
 
   ThemeModeController() {
-    Future.delayed(Duration.zero, () {
-      loadSavedThemeMode();
-    });
+    loadSavedThemeMode();
   }
 
   void changeThemeMode(ThemeMode mode) {

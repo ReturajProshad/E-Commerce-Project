@@ -1,8 +1,10 @@
 import 'package:crafty_bay_app/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
-import 'package:crafty_bay_app/presentation/ui/widgets/product_card.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../utility/app_colors.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({Key? key});
@@ -65,19 +67,118 @@ class _WishListScreenState extends State<WishListScreen> {
                     SliverGrid(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                        crossAxisCount: 2,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                       ),
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          return FittedBox(
-                            // child: Text("$Wishlistedids"),
-                            child: ProductCard(
-                              product: ProductListController
-                                  .wishlistModel.data![index],
+                          final product =
+                              ProductListController.wishlistModel.data![index];
+                          return InkWell(
+                            borderRadius: BorderRadius.circular(8),
+                            onTap: () {
+                              Get.to(ProductDetailsScreen(
+                                productId: product.product!.id!,
+                              ));
+                            },
+                            child: Card(
+                              shadowColor:
+                                  AppColors.primaryColor.withOpacity(0.1),
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: SizedBox(
+                                width: 25,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryColor
+                                            .withOpacity(0.1),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(8),
+                                          topRight: Radius.circular(8),
+                                        ),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              product.product!.image ?? ''),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            product.product!.title ?? '',
+                                            maxLines: 1,
+                                            style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.blueGrey),
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '\$${product.product!.price ?? 0}',
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    color:
+                                                        AppColors.primaryColor,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Wrap(
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.star,
+                                                    size: 15,
+                                                    color: Colors.amber,
+                                                  ),
+                                                  Text(
+                                                    '${product.product!.star ?? 0}',
+                                                    style: const TextStyle(
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.blueGrey),
+                                                  ),
+                                                ],
+                                              ),
+                                              const Card(
+                                                color: AppColors.primaryColor,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(2.0),
+                                                  child: Icon(
+                                                    Icons.format_overline_sharp,
+                                                    size: 12,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           );
+                          ;
                         },
                         childCount:
                             ProductListController.wishlistModel.data?.length ??

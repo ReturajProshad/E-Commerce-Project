@@ -24,28 +24,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
   int quantity = 1;
+  List<int> Wlisted = [];
 
+  bool iswishlisted = false;
   @override
   void initState() {
-    isWishlisteditem();
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+      Get.find<ProductListController>().getWishList();
+      Wlisted = ProductListController.wishlistProductIds;
+      //isWishlisteditem();
+      iswishlisted = isProductInWishlist(widget.productId);
+      print("from pdetails");
+      print(Wlisted);
+      print(widget.productId);
     });
   }
 
-  List<int> Wlisted = ProductListController.wishlistProductIds;
-  bool iswishlisted = false;
-  void isWishlisteditem() {
-    //print(Wlisted);
-    for (int i in Wlisted) {
-      if (i == widget.productId) {
-        iswishlisted = true;
-        break;
-      }
-    }
-  }
+  // bool iswishlisted = false;
+  // void isWishlisteditem() {
+  //   //print(Wlisted);
+  //   for (int i in Wlisted) {
+  //     if (i == widget.productId) {
+  //       iswishlisted = true;
+  //       break;
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -324,25 +331,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   addToWishlist() async {
-    final isWishlisted = isProductInWishlist(widget.productId);
-
-    if (isWishlisted) {
-      final response = await NetworkCaller.getRequest(
-          Urls.RemovefromWishList(widget.productId));
-      if (response.isSuccess) {
-        if (mounted) {
-          setState(() {
-            iswishlisted = false;
-          });
-        }
-      }
-    } else {
+    print(iswishlisted);
+    if (iswishlisted == false) {
       final response =
           await NetworkCaller.getRequest(Urls.addWishList(widget.productId));
       if (response.isSuccess) {
         if (mounted) {
           setState(() {
             iswishlisted = true;
+          });
+        }
+      }
+    } else {
+      final response = await NetworkCaller.getRequest(
+          Urls.RemovefromWishList(widget.productId));
+      if (response.isSuccess) {
+        if (mounted) {
+          setState(() {
+            iswishlisted = false;
           });
         }
       }

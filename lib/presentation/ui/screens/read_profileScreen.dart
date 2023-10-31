@@ -132,12 +132,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ));
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue, // Change the button's background color
-            padding:
-                EdgeInsets.all(16), // Add padding around the button's content
+            primary: Colors.blue,
+            padding: EdgeInsets.all(16),
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(8), // Round the button's corners
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
           child: Text(isNull ? "Complete Your Profile" : "Edit Profile"),

@@ -67,10 +67,8 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
 
                   final responseData = response.responseJson;
                   final reviewId = responseData!['data']['id'];
-                  // Handle success, e.g., navigate to the review or update the UI
                 } else {
                   Get.snackbar("Faild", "Done");
-                  // Handle the case where the review creation failed
                 }
               },
               child: const Text('Submit Review'),

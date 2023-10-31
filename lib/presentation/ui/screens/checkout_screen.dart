@@ -1,5 +1,6 @@
 import 'package:crafty_bay_app/data/models/payment_method.dart';
 import 'package:crafty_bay_app/presentation/state_holders/create_invoice_controller.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay_app/presentation/ui/screens/webview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,8 +41,29 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             );
           }
           if (!isCompleted) {
-            return const Center(
-              child: Text('Please complete your profile first'),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text('Please complete your profile first'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.to(CompleteProfileScreen());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text("Complete Profile"),
+                  )
+                ],
+              ),
             );
           }
           return ListView.separated(
