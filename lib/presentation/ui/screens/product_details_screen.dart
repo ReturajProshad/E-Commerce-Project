@@ -330,17 +330,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       final response = await NetworkCaller.getRequest(
           Urls.RemovefromWishList(widget.productId));
       if (response.isSuccess) {
-        setState(() {
-          iswishlisted = false;
-        });
+        if (mounted) {
+          setState(() {
+            iswishlisted = false;
+          });
+        }
       }
     } else {
       final response =
           await NetworkCaller.getRequest(Urls.addWishList(widget.productId));
       if (response.isSuccess) {
-        setState(() {
-          iswishlisted = true;
-        });
+        if (mounted) {
+          setState(() {
+            iswishlisted = true;
+          });
+        }
       }
     }
   }

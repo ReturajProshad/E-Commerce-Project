@@ -1,81 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../data/services/create_review_caller.dart';
 
 class CreateReviewScreen extends StatefulWidget {
-  const CreateReviewScreen({Key? key}) : super(key: key);
-
+  const CreateReviewScreen({Key? key, required this.PRid}) : super(key: key);
+  final int PRid;
   @override
-  State<CreateReviewScreen> createState() => _CreateReviewScreenState();
+  // ignore: library_private_types_in_public_api
+  _CreateReviewScreenState createState() => _CreateReviewScreenState();
 }
 
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
+  final TextEditingController descriptionController = TextEditingController();
+  int rating = 5; // Initialize with the default rating
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      appBar: AppBar(
+        title: const Text('Create Review'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CreateReviewsAppBar,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'First name'),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(hintText: 'Last name'),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      maxLines: 6,
-                      decoration: const InputDecoration(
-                        hintText: 'Write Review',
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
+            TextField(
+              controller: descriptionController,
+              decoration:
+                  const InputDecoration(labelText: 'Review Description'),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                const Text('Rating: '),
+                DropdownButton<int>(
+                  value: rating,
+                  onChanged: (int? value) {
+                    if (value != null) {
+                      setState(() {
+                        rating = value;
+                      });
+                    }
+                  },
+                  items: [1, 2, 3, 4, 5]
+                      .map<DropdownMenuItem<int>>(
+                        (int value) => DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(value.toString()),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Submit'),
-                      ),
-                    ),
-                  ],
+                      )
+                      .toList(),
                 ),
-              ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () async {
+                final description = descriptionController.text;
+                final productId = widget.PRid.toString();
+                final response = await createReview(
+                    description, productId, rating.toString());
+
+                if (response.isSuccess) {
+                  Get.snackbar("Success", "Done");
+
+                  final responseData = response.responseJson;
+                  final reviewId = responseData!['data']['id'];
+                  // Handle success, e.g., navigate to the review or update the UI
+                } else {
+                  Get.snackbar("Faild", "Done");
+                  // Handle the case where the review creation failed
+                }
+              },
+              child: const Text('Submit Review'),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  AppBar get CreateReviewsAppBar {
-    return AppBar(
-      leading: const BackButton(
-        color: Colors.black54,
-      ),
-      title: const Text(
-        'Create Review',
-        style: TextStyle(color: Colors.black54),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      bottomOpacity: 1.0,
     );
   }
 }

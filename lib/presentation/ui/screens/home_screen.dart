@@ -2,6 +2,7 @@ import 'package:crafty_bay_app/presentation/state_holders/category_controller.da
 import 'package:crafty_bay_app/presentation/state_holders/new_product_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/popular_product_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/special_product_controller.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/read_profileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.person,
-              onTap: () {},
+              onTap: () {
+                Get.to(ProfileScreen());
+              },
             ),
             const SizedBox(
               width: 8,

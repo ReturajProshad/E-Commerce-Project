@@ -34,4 +34,8 @@ class Urls {
   static const String createInvoice = '$_baseUrl/InvoiceCreate';
 
   static String getReviewsbyid(int id) => '$_baseUrl/ListReviewByProduct/$id';
+
+  static String CreateReview = '$_baseUrl/CreateProductReview';
+
+  static String ReadProfile = '$_baseUrl/ReadProfile';
 }
