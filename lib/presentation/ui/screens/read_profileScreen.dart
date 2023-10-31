@@ -1,7 +1,9 @@
 import 'package:crafty_bay_app/data/models/Profile_model.dart';
 import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../data/utility/urls.dart';
 
@@ -13,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool isNull = false;
   ProfileModel? _profile;
 
   @override
@@ -29,6 +32,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         if (response.responseJson != null) {
           _profile = ProfileModel.fromJson(response.responseJson!);
+          if (_profile!.data == null) {
+            isNull = true;
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Profile Not Completed'),
+                  content: const Text('please Complete Your profile.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Get.to(CompleteProfileScreen());
+                      },
+                      child: const Text('Complete Profile'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         }
       });
     } else {
@@ -42,9 +65,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                 },
-                child: const Text('OK'),
+                child: const Text('ok'),
               ),
             ],
           );
@@ -97,6 +120,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ProfileInfos("Shipping Address:", _profile!.data?.shipAdd ?? 'N/A'),
         ProfileInfos(
             "Receiver Phone Number:", _profile!.data?.shipPhone ?? 'N/A'),
+        SizedBox(
+          height: 18,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Get.to(isNull
+                ? CompleteProfileScreen()
+                : CompleteProfileScreen(
+                    comeform: _profile,
+                  ));
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue, // Change the button's background color
+            padding:
+                EdgeInsets.all(16), // Add padding around the button's content
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(8), // Round the button's corners
+            ),
+          ),
+          child: Text(isNull ? "Complete Your Profile" : "Edit Profile"),
+        )
       ],
     );
   }

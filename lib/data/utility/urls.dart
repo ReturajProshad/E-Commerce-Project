@@ -38,4 +38,6 @@ class Urls {
   static String CreateReview = '$_baseUrl/CreateProductReview';
 
   static String ReadProfile = '$_baseUrl/ReadProfile';
+
+  static String CreateProfile = '$_baseUrl/CreateProfile';
 }

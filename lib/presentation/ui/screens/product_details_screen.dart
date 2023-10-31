@@ -167,7 +167,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: Card(
                   color: AppColors.primaryColor,
                   child: Padding(
-                    padding: EdgeInsets.all(2.0),
+                    padding: const EdgeInsets.all(2.0),
                     child: Icon(
                       iswishlisted
                           ? Icons.format_overline_sharp
