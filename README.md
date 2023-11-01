@@ -7,13 +7,12 @@
   <h2>Project Structure</h2>
   <pre>
     <code><b>
-CraftyBay
-└lib
-├── application
+CraftyBay/lib
+├── application/
 │   ├── app.dart
 │   └── state_holder_binder.dart
-├── data
-│   ├── models
+├── data/
+│   ├── models/
 │   │   ├── Profile_model.dart
 │   │   ├── Review_model.dart
 │   │   ├── WishList_model.dart
@@ -31,30 +30,31 @@ CraftyBay
 │   │   ├── product_details_model.dart
 │   │   ├── slider_model.dart
 │   │   └── product_model.dart
-│   ├── services
+│   ├── services/
 │   │   ├── create_review_caller.dart
 │   │   └── network_caller.dart
-│   └── utility
-│   │   └── urls.dart
-├── Presentation 
-│   ├── State_holders</b> //all controllers are here<b>
-│   ├── ui
-│   │   ├── screens
-│   │   │   ├── auth
-│   │   │   │   ├── complete_profile_screen.dart      
-│   │   │   │   ├── email_verification_screen.dart
-│   │   │   │   └── otp_verification_screen.dart
-│   │   │   └── </b>//all other screens are here<b>
-│   ├── utility
+│   └── utility/
+│       └── urls.dart
+├── Presentation /
+│   ├── State_holders/ </b>     #all state holders and controllers are here<b>
+│   ├── ui/
+│   │   └── screens/
+│   │       ├── auth/
+│   │       │   ├── complete_profile_screen.dart      
+│   │       │   ├── email_verification_screen.dart
+│   │       │   └── otp_verification_screen.dart
+│   │       └── </b> #all other screens are here<b>
+│   ├── utility/
 │   │   ├── app_colors.dart
 │   │   ├── color_extension.dart
 │   │   └── image_assets.dart
-│   └── Widgets
-│   │   └── Home
-│   │   │   ├── home_slider.dart
-│   │   │   ├── product_image_slider.dart
-│   │   │   └── section_header.dart
-│   │   └─</b> //all other widgets like customstepper , cards , styles are here
+│   └── Widgets/
+│       ├── Home/
+│       │   ├── home_slider.dart
+│       │   ├── product_image_slider.dart
+│       │   └── section_header.dart
+│       └─</b> #all other widgets like customstepper , cards , styles are here <b>
+└── main.dart</b>
      </code>
   </pre>
 </body>
