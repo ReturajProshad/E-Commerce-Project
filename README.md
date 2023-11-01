@@ -57,5 +57,18 @@ CraftyBay/lib
 └── main.dart</b>
      </code>
   </pre>
+  
+<h2>video screen record</h2>
+
+<h3>Complete Your Profile</h3>
+
+
+ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/787cecd2-5790-4458-aa45-6e72edc08d46
+
+ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/d6bd5078-8ab2-483e-bc70-58aa91af915f
+
+ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/0ece0df2-4dd0-4827-a117-5bfff7f5fcd6
+
+
 </body>
 </html>
