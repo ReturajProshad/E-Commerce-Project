@@ -37,14 +37,14 @@ CraftyBay
 │   └── utility
 │   │   └── urls.dart
 ├── Presentation 
-│   ├── State_holders //all controllers are here
+│   ├── State_holders</b> //all controllers are here<b>
 │   ├── ui
 │   │   ├── screens
 │   │   │   ├── auth
 │   │   │   │   ├── complete_profile_screen.dart      
 │   │   │   │   ├── email_verification_screen.dart
 │   │   │   │   └── otp_verification_screen.dart
-│   │   │   └── //all other screens are here
+│   │   │   └── </b>//all other screens are here<b>
 │   ├── utility
 │   │   ├── app_colors.dart
 │   │   ├── color_extension.dart
@@ -54,8 +54,8 @@ CraftyBay
 │   │   │   ├── home_slider.dart
 │   │   │   ├── product_image_slider.dart
 │   │   │   └── section_header.dart
-│   │   └─ //all other widgets like customstepper , cards , styles are here
-    </b> </code>
+│   │   └─</b> //all other widgets like customstepper , cards , styles are here
+     </code>
   </pre>
 </body>
 </html>
