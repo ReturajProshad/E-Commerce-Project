@@ -1,32 +1,25 @@
-import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
-
-import '../../../data/models/product.dart';
-
-import '../utility/app_colors.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/product_details_screen.dart';
+import 'package:crafty_bay_app/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screens/product_details_screen.dart';
+import '../../../data/models/WishList_model.dart';
 
-// ignore: must_be_immutable
-class ProductCard extends StatefulWidget {
-  ProductCard({super.key, required this.product, this.isWlisted = false});
-  bool isWlisted;
-  final Product product;
+class Wishlist_card extends StatelessWidget {
+  const Wishlist_card({
+    super.key,
+    required this.product,
+  });
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
+  final Data product;
 
-class _ProductCardState extends State<ProductCard> {
-  // List<int> Wlisted = ProductListController.wishlistProductIds;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: () {
         Get.to(ProductDetailsScreen(
-          productId: widget.product.id!,
+          productId: product.product!.id!,
         ));
       },
       child: Card(
@@ -34,11 +27,11 @@ class _ProductCardState extends State<ProductCard> {
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: SizedBox(
-          width: 130,
+          width: 50,
           child: Column(
             children: [
               Container(
-                height: 100,
+                height: 110,
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.only(
@@ -46,7 +39,7 @@ class _ProductCardState extends State<ProductCard> {
                     topRight: Radius.circular(8),
                   ),
                   image: DecorationImage(
-                    image: NetworkImage(widget.product.image ?? ''),
+                    image: NetworkImage(product.product!.image ?? ''),
                   ),
                 ),
               ),
@@ -55,7 +48,7 @@ class _ProductCardState extends State<ProductCard> {
                 child: Column(
                   children: [
                     Text(
-                      widget.product.title ?? '',
+                      product.product!.title ?? '',
                       maxLines: 1,
                       style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -70,7 +63,7 @@ class _ProductCardState extends State<ProductCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${widget.product.price ?? 0}',
+                          '\$${product.product!.price ?? 0}',
                           style: const TextStyle(
                               fontSize: 13,
                               color: AppColors.primaryColor,
@@ -85,7 +78,7 @@ class _ProductCardState extends State<ProductCard> {
                               color: Colors.amber,
                             ),
                             Text(
-                              '${widget.product.star ?? 0}',
+                              '${product.product!.star ?? 0}',
                               style: const TextStyle(
                                   overflow: TextOverflow.ellipsis,
                                   fontSize: 12,
@@ -94,16 +87,12 @@ class _ProductCardState extends State<ProductCard> {
                             ),
                           ],
                         ),
-                        Card(
-                          color: widget.isWlisted
-                              ? Colors.red
-                              : AppColors.primaryColor,
+                        const Card(
+                          color: Colors.red,
                           child: Padding(
                             padding: EdgeInsets.all(2.0),
                             child: Icon(
-                              widget.isWlisted
-                                  ? Icons.format_overline_sharp
-                                  : Icons.favorite_border,
+                              Icons.format_overline_sharp,
                               size: 12,
                               color: Colors.white,
                             ),

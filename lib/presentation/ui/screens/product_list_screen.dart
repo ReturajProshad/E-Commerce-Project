@@ -25,8 +25,24 @@ class _ProductListScreenState extends State<ProductListScreen> {
       } else if (widget.productModel != null) {
         Get.find<ProductListController>().setProducts(widget.productModel!);
       }
+      _refreshData();
     });
     super.initState();
+  }
+
+  List<int> Wlisted = [];
+  bool iswishlisted = false;
+  Future<void> _refreshData() async {
+    await Get.find<ProductListController>().getWishList();
+    if (mounted) {
+      setState(() {
+        Wlisted = ProductListController.wishlistProductIds;
+      });
+    }
+  }
+
+  bool isProductInWishlist(int productId) {
+    return Wlisted.contains(productId);
   }
 
   @override
@@ -67,6 +83,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 return FittedBox(
                   child: ProductCard(
                     product: productListController.productModel.data![index],
+                    isWlisted: isProductInWishlist(
+                        productListController.productModel.data![index].id!),
                   ),
                 );
               }),

@@ -4,6 +4,7 @@ import 'package:crafty_bay_app/data/utility/urls.dart';
 import 'package:crafty_bay_app/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/home_screen.dart';
 import 'package:crafty_bay_app/presentation/ui/screens/review_screen.dart';
 import '../utility/app_colors.dart';
 import '../widgets/custom_stepper.dart';
@@ -21,38 +22,26 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  HomeScreen? homescreenInstance;
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
   int quantity = 1;
   List<int> Wlisted = [];
-
   bool iswishlisted = false;
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProductDetailsController>().getProductDetails(widget.productId);
       Get.find<ProductListController>().getWishList();
       Wlisted = ProductListController.wishlistProductIds;
       //isWishlisteditem();
       iswishlisted = isProductInWishlist(widget.productId);
-      print("from pdetails");
-      print(Wlisted);
-      print(widget.productId);
+      // print("from pdetails");
+      // print(Wlisted);
+      // print(widget.productId);
     });
   }
-
-  // bool iswishlisted = false;
-  // void isWishlisteditem() {
-  //   //print(Wlisted);
-  //   for (int i in Wlisted) {
-  //     if (i == widget.productId) {
-  //       iswishlisted = true;
-  //       break;
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,18 +62,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     children: [
                       Stack(
                         children: [
-                          ProductImageSlider(
-                            imageList: [
-                              productDetailsController.productDetails.img1 ??
-                                  '',
-                              productDetailsController.productDetails.img2 ??
-                                  '',
-                              productDetailsController.productDetails.img3 ??
-                                  '',
-                              productDetailsController.productDetails.img4 ??
-                                  '',
-                            ],
-                          ),
+                          productImageSlider(productDetailsController),
                           productDetailsAppBar,
                         ],
                       ),
@@ -103,6 +81,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         );
       }),
+    );
+  }
+
+  ProductImageSlider productImageSlider(
+      ProductDetailsController productDetailsController) {
+    return ProductImageSlider(
+      imageList: [
+        productDetailsController.productDetails.img1 ?? '',
+        productDetailsController.productDetails.img2 ?? '',
+        productDetailsController.productDetails.img3 ?? '',
+        productDetailsController.productDetails.img4 ?? '',
+      ],
     );
   }
 
@@ -132,61 +122,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   })
             ],
           ),
-          Row(
-            children: [
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.star,
-                    size: 18,
-                    color: Colors.amber,
-                  ),
-                  Text(
-                    '${productDetails.product?.star ?? 0}',
-                    style: const TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.blueGrey),
-                  ),
-                ],
-              ),
-              TextButton(
-                onPressed: () {
-                  //print(widget.productId);
-                  Get.to(ReviewScreen(
-                    Pid: widget.productId,
-                  ));
-                },
-                child: const Text(
-                  'Review',
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  addToWishlist();
-                },
-                child: Card(
-                  color: AppColors.primaryColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Icon(
-                      iswishlisted
-                          ? Icons.format_overline_sharp
-                          : Icons.favorite_border,
-                      size: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+          Star_review_wishlist_button(productDetails),
           const Text(
             'Color',
             style: TextStyle(
@@ -246,6 +182,64 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Text(productDetails.des ?? ''),
         ],
       ),
+    );
+  }
+
+  Row Star_review_wishlist_button(ProductDetails productDetails) {
+    return Row(
+      children: [
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            const Icon(
+              Icons.star,
+              size: 18,
+              color: Colors.amber,
+            ),
+            Text(
+              '${productDetails.product?.star ?? 0}',
+              style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blueGrey),
+            ),
+          ],
+        ),
+        TextButton(
+          onPressed: () {
+            //print(widget.productId);
+            Get.to(ReviewScreen(
+              Pid: widget.productId,
+            ));
+          },
+          child: const Text(
+            'Review',
+            style: TextStyle(
+                fontSize: 15,
+                color: AppColors.primaryColor,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            addToWishlist();
+          },
+          child: Card(
+            color: iswishlisted ? Colors.red : AppColors.primaryColor,
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Icon(
+                iswishlisted
+                    ? Icons.format_overline_sharp
+                    : Icons.favorite_border,
+                size: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 
@@ -331,11 +325,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   addToWishlist() async {
-    print(iswishlisted);
+    //  print(iswishlisted);
     if (iswishlisted == false) {
       final response =
           await NetworkCaller.getRequest(Urls.addWishList(widget.productId));
       if (response.isSuccess) {
+        Get.snackbar("Congratulations", "successfully added to wishlist");
         if (mounted) {
           setState(() {
             iswishlisted = true;
@@ -346,6 +341,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       final response = await NetworkCaller.getRequest(
           Urls.RemovefromWishList(widget.productId));
       if (response.isSuccess) {
+        Get.snackbar("Removed", "successfully removed from wishlist");
         if (mounted) {
           setState(() {
             iswishlisted = false;

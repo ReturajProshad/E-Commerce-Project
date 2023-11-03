@@ -13,7 +13,7 @@ class CreateReviewScreen extends StatefulWidget {
 
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
   final TextEditingController descriptionController = TextEditingController();
-  int rating = 5; // Initialize with the default rating
+  int rating = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +58,9 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
             ElevatedButton(
               onPressed: () async {
                 final description = descriptionController.text;
-                final productId = widget.PRid.toString();
-                final response = await createReview(
-                    description, productId, rating.toString());
+                final productId = widget.PRid;
+                final response =
+                    await createReview(description, productId, rating);
 
                 if (response.isSuccess) {
                   Get.snackbar("Success", "Done");
@@ -68,7 +68,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   final responseData = response.responseJson;
                   final reviewId = responseData!['data']['id'];
                 } else {
-                  Get.snackbar("Faild", "Done");
+                  Get.snackbar("Faild", "Try Again");
                 }
               },
               child: const Text('Submit Review'),

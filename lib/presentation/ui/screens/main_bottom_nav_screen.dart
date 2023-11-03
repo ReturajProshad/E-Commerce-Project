@@ -22,7 +22,7 @@ class MainBottomNavScreen extends StatefulWidget {
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const CategoryListScreen(),
     const CartScreen(),
     const WishListScreen(),

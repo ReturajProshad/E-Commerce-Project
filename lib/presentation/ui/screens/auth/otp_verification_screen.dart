@@ -114,30 +114,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   height: 24,
                 ),
                 code_expaire_text_and_count(),
-                TextButton(
-                  onPressed: () {
-                    //print(count);
-                    if (count == 120) {
-                      resendOtp(widget.email);
-                      if (mounted) {
-                        count = 0;
-                        count = 0;
-                        _countdownController.close();
-                        _countdownController = StreamController<
-                            int>(); // Create a new StreamController
-                        _startTimer();
-                        setState(() {});
-                      }
-                    }
-                  },
-                  style: TextButton.styleFrom(
-                      foregroundColor: count == 0
-                          ? const Color.fromARGB(255, 241, 2, 2)
-                          : AppColors.primaryColor),
-                  child: const Text(
-                    'Resend',
-                  ),
-                ),
               ],
             ),
           ),
@@ -152,21 +128,48 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       builder: (context, snapshot) {
         final countdownValue = snapshot.data ?? 0;
         count = countdownValue;
-        return RichText(
-          text: TextSpan(
-            style: TextStyle(color: Colors.grey),
-            children: [
-              TextSpan(text: 'This code will expire in '),
-              TextSpan(
-                text: '${120 - countdownValue}s',
-                style: TextStyle(
-                  color:
-                      countdownValue > 0 ? AppColors.primaryColor : Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
+        return Column(
+          children: [
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.grey),
+                children: [
+                  TextSpan(text: 'This code will expire in '),
+                  TextSpan(
+                    text: '${120 - countdownValue}s',
+                    style: TextStyle(
+                      color: countdownValue > 0
+                          ? AppColors.primaryColor
+                          : Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            TextButton(
+              onPressed: () {
+                //print(count);
+                if (count == 120) {
+                  resendOtp(widget.email);
+                  if (mounted) {
+                    count = 0;
+                    _countdownController.close();
+                    _countdownController = StreamController<int>();
+                    _startTimer();
+                    setState(() {});
+                  }
+                }
+              },
+              style: TextButton.styleFrom(
+                  foregroundColor: count < 120
+                      ? const Color.fromARGB(255, 241, 2, 2)
+                      : AppColors.primaryColor),
+              child: const Text(
+                'Resend',
+              ),
+            ),
+          ],
         );
       },
     );
