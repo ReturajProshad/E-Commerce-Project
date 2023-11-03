@@ -60,14 +60,31 @@ CraftyBay/lib
   
 <h2>video screen record</h2>
 
-<h3>Complete Your Profile</h3>
+<h3>Otp verification Screen</h3>
 
+
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/42c4100e-dcb9-4f67-9561-2f9950c21b18
+
+
+<h3>Complete Your Profile</h3>
 
  https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/787cecd2-5790-4458-aa45-6e72edc08d46
 
  https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/d6bd5078-8ab2-483e-bc70-58aa91af915f
 
  https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/0ece0df2-4dd0-4827-a117-5bfff7f5fcd6
+
+
+<h3>Wish List Check</h3>
+
+
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/679ca6e5-478d-4e1e-b6cf-7fa291bfe15b
+
+
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/1e4c9695-f07a-4703-b562-4e6fd5cfedd6
+
+
+<h3>Overview</h3>
 
 
 </body>
