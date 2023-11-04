@@ -83,6 +83,10 @@ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/679ca6e5-4
 
 https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/1e4c9695-f07a-4703-b562-4e6fd5cfedd6
 
+<h3>Search bar</h3>
+
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/2383a7d4-1b74-488e-ab6b-927351ec1ae6
+
 
 <h3>Overview</h3>
 
