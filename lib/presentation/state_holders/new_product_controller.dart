@@ -1,6 +1,7 @@
 import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/models/product_model.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:get/get.dart';
 
 import '../../data/utility/urls.dart';
@@ -24,6 +25,9 @@ class NewProductController extends GetxController {
     _getNewProductsInProgress = false;
     if (response.isSuccess) {
       _newProductModel = ProductModel.fromJson(response.responseJson ?? {});
+      _newProductModel.data!.forEach((element) {
+        appListClass.appLists[element.id ?? 0] = element.title ?? '';
+      });
       update();
       return true;
     } else {

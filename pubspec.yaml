@@ -21,6 +21,7 @@ dependencies:
   shared_preferences: ^2.2.1
   connectivity_plus: ^5.0.0
   webview_flutter: ^4.4.1
+  easy_search_bar: ^2.5.0
 
 dev_dependencies:
   flutter_test:

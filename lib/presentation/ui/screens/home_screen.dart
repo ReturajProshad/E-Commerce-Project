@@ -4,6 +4,8 @@ import 'package:crafty_bay_app/presentation/state_holders/popular_product_contro
 import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/special_product_controller.dart';
 import 'package:crafty_bay_app/presentation/ui/screens/read_profileScreen.dart';
+import 'package:crafty_bay_app/presentation/ui/widgets/home/search_bar_widget.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -25,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<int> Wlisted = [];
-
+  String searchValue = "";
   @override
   void initState() {
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -109,19 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey.shade200,
-                    filled: true,
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: 'Search',
-                    border:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    focusedBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                    enabledBorder:
-                        const OutlineInputBorder(borderSide: BorderSide.none),
-                  ),
+                SearchBarWidget(
+                  onSearch: (String value) {
+                    searchValue = value;
+                  },
                 ),
                 const SizedBox(
                   height: 16,

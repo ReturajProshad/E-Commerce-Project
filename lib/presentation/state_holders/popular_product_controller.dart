@@ -1,6 +1,7 @@
 import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/models/product_model.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/data/utility/urls.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,11 @@ class PopularProductController extends GetxController {
     _getPopularProductsInProgress = false;
     if (response.isSuccess) {
       _popularProductModel = ProductModel.fromJson(response.responseJson ?? {});
+      _popularProductModel.data!.forEach((element) {
+        appListClass.appLists[element.id ?? 0] = element.title ?? '';
+      });
+      // print("popular");
+      // print(appListClass.appLists);
       update();
       return true;
     } else {

@@ -1,5 +1,3 @@
-import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
-
 import '../../../data/models/product.dart';
 
 import '../utility/app_colors.dart';

@@ -134,7 +134,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
             splashColor: const Color.fromRGBO(4, 0, 226, 1),
             backgroundColor: Colors.red,
             onPressed: () {
-              print(widget.Pid);
+              // print(widget.Pid);
               Get.to(CreateReviewScreen(
                 PRid: widget.Pid,
               ));
