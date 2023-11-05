@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/product_details_screen.dart';
+import 'package:get/get.dart';
 import '../../../../data/models/slider_data.dart';
 import '../../utility/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -29,29 +31,36 @@ class _HomeSliderState extends State<HomeSlider> {
           items: widget.sliders.map((sliderData) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8)),
-                  alignment: Alignment.center,
-                  child: Stack(
-                    children: [
-                      Image.network(
-                        sliderData.image ?? '',
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: Text(
-                          sliderData.title ?? '',
-                          style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                return InkWell(
+                  onTap: () {
+                    Get.to(ProductDetailsScreen(
+                      productId: sliderData.productId!,
+                    ));
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(8)),
+                    alignment: Alignment.center,
+                    child: Stack(
+                      children: [
+                        Image.network(
+                          sliderData.image ?? '',
                         ),
-                      )
-                    ],
+                        Positioned(
+                          bottom: 0,
+                          child: Text(
+                            sliderData.title ?? '',
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

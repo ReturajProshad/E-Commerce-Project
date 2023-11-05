@@ -20,7 +20,8 @@ import '../widgets/product_card.dart';
 import 'product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  // final VoidCallback Wishchanged;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

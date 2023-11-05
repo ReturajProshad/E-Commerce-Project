@@ -349,6 +349,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         }
       }
     }
+    //HomeScreen(Wishchanged: () {});
   }
 
   bool isProductInWishlist(int productId) {
