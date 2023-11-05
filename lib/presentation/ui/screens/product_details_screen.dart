@@ -118,6 +118,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   stepValue: 1,
                   value: 1,
                   onChange: (newValue) {
+                    //  print(quantity);
                     quantity = newValue;
                   })
             ],
@@ -270,7 +271,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -284,7 +285,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$1000',
+                '${details.product!.price}',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
@@ -303,8 +304,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               }
               return ElevatedButton(
                 onPressed: () async {
+                  print(widget.productId);
                   final result = await addToCartController.addToCart(
-                    details.id!,
+                    widget.productId,
                     colors[_selectedColorIndex].toString(),
                     sizes[_selectedSizeIndex],
                     quantity,
