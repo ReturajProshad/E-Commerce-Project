@@ -2,12 +2,11 @@ import 'package:crafty_bay_app/data/models/WishList_model.dart';
 import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/models/product_model.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/data/utility/urls.dart';
 import 'package:get/get.dart';
 
 class ProductListController extends GetxController {
-  static List<int> wishlistProductIds = [];
-
   bool _getProductsInProgress = false;
   ProductModel _productModel = ProductModel();
   String _message = '';
@@ -50,11 +49,11 @@ class ProductListController extends GetxController {
     if (response.isSuccess) {
       _wishlistModel = wishListModel.fromJson(response.responseJson ?? {});
       // print(_wishlistModel.data![0]);
-      wishlistProductIds = _wishlistModel.data
+      appListClass.wishlistProductIds = _wishlistModel.data
               ?.map((product) => product.productId ?? 0)
               .toList() ??
           [];
-      print(wishlistProductIds);
+      print(appListClass.wishlistProductIds);
       update();
       return true;
     } else {

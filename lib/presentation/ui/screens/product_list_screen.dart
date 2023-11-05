@@ -1,4 +1,5 @@
 import 'package:crafty_bay_app/data/models/product_model.dart';
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -36,7 +37,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     await Get.find<ProductListController>().getWishList();
     if (mounted) {
       setState(() {
-        Wlisted = ProductListController.wishlistProductIds;
+        Wlisted = appListClass.wishlistProductIds;
       });
     }
   }

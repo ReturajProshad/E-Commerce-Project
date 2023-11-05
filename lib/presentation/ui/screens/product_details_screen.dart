@@ -1,5 +1,6 @@
 import 'package:crafty_bay_app/data/models/product_details.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/data/utility/urls.dart';
 import 'package:crafty_bay_app/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_details_controller.dart';
@@ -34,7 +35,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProductDetailsController>().getProductDetails(widget.productId);
       Get.find<ProductListController>().getWishList();
-      Wlisted = ProductListController.wishlistProductIds;
+      Wlisted = appListClass.wishlistProductIds;
       //isWishlisteditem();
       iswishlisted = isProductInWishlist(widget.productId);
       // print("from pdetails");
@@ -186,6 +187,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Row Star_review_wishlist_button(ProductDetails productDetails) {
     return Row(
       children: [
@@ -274,19 +276,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Price',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: Colors.black54),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
               Text(
-                '${details.product!.price}',
-                style: TextStyle(
+                '${details.product?.price}',
+                style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
                     color: AppColors.primaryColor),

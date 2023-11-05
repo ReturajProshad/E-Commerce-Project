@@ -1,3 +1,4 @@
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/product_list_controller.dart';
 import 'package:crafty_bay_app/presentation/ui/widgets/Wish_list_card.dart';
@@ -24,7 +25,7 @@ class _WishListScreenState extends State<WishListScreen> {
     await Get.find<ProductListController>().getWishList();
   }
 
-  List<int> Wishlistedids = ProductListController.wishlistProductIds;
+  List<int> Wishlistedids = appListClass.wishlistProductIds;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

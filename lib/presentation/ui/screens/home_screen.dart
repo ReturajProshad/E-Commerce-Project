@@ -1,3 +1,4 @@
+import 'package:crafty_bay_app/data/utility/all_apps.dart';
 import 'package:crafty_bay_app/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/new_product_controller.dart';
 import 'package:crafty_bay_app/presentation/state_holders/popular_product_controller.dart';
@@ -5,7 +6,6 @@ import 'package:crafty_bay_app/presentation/state_holders/product_list_controlle
 import 'package:crafty_bay_app/presentation/state_holders/special_product_controller.dart';
 import 'package:crafty_bay_app/presentation/ui/screens/read_profileScreen.dart';
 import 'package:crafty_bay_app/presentation/ui/widgets/home/search_bar_widget.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await Get.find<ProductListController>().getWishList();
     if (mounted) {
       setState(() {
-        Wlisted = ProductListController.wishlistProductIds;
+        Wlisted = appListClass.wishlistProductIds;
       });
     }
   }
