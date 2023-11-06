@@ -90,6 +90,10 @@ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/c8ce9b9b-d
 
 
 
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/0c270ada-f827-4592-84b2-e7d2dcdbd99c
+
+
+
 <h3>Search bar</h3>
 
 https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/2383a7d4-1b74-488e-ab6b-927351ec1ae6
