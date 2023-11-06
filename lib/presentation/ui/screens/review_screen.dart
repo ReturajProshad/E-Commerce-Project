@@ -1,5 +1,8 @@
+import 'package:crafty_bay_app/data/models/Profile_model.dart';
+import 'package:crafty_bay_app/data/models/network_response.dart';
 import 'package:crafty_bay_app/data/services/network_caller.dart';
 import 'package:crafty_bay_app/data/utility/urls.dart';
+import 'package:crafty_bay_app/presentation/ui/screens/auth/complete_profile_screen.dart';
 
 import '../../../data/models/Review_model.dart';
 import 'create_review_screen.dart';
@@ -16,15 +19,40 @@ class ReviewScreen extends StatefulWidget {
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  late Future<List<Data>?> reviews;
+  late Future<List<ReviewData>?> reviews;
+  ProfileModel? _profile;
   int totalReviews = 0;
   @override
   void initState() {
     super.initState();
+    checkProfileComplete();
     reviews = fetchReviews();
   }
 
-  Future<List<Data>?> fetchReviews() async {
+  bool isOk = true;
+  Future<void> checkProfileComplete() async {
+    final NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.ReadProfile);
+    if (response.isSuccess) {
+      _profile = ProfileModel.fromJson(response.responseJson!);
+      if (_profile!.data != null) {
+        isOk = true;
+        if (mounted) {
+          setState(() {});
+        }
+      } else {
+        // ignore: use_build_context_synchronously
+        isOk = false;
+        if (mounted) {
+          setState(() {});
+        }
+      }
+    } else {
+      Get.snackbar("Error", "Network Problem");
+    }
+  }
+
+  Future<List<ReviewData>?> fetchReviews() async {
     final response =
         await NetworkCaller.getRequest(Urls.getReviewsbyid(widget.Pid));
     if (response.isSuccess) {
@@ -44,7 +72,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
         children: [
           ReviewsAppBar,
           Expanded(
-            child: FutureBuilder<List<Data>?>(
+            child: FutureBuilder<List<ReviewData>?>(
               future: reviews,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -135,9 +163,31 @@ class _ReviewScreenState extends State<ReviewScreen> {
             backgroundColor: Colors.red,
             onPressed: () {
               // print(widget.Pid);
-              Get.to(CreateReviewScreen(
-                PRid: widget.Pid,
-              ));
+              isOk
+                  ? Get.to(CreateReviewScreen(
+                      PRid: widget.Pid,
+                    ))
+                  : Get.to(CompleteProfileScreen());
+              if (!isOk) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Profile Not Completed'),
+                      content:
+                          const Text('please Complete Your profile first.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            navigator?.pop(context);
+                          },
+                          child: const Text('ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             child: const Icon(Icons.add),
           )

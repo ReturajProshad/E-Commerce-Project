@@ -9,6 +9,7 @@ import 'package:crafty_bay_app/presentation/ui/widgets/home/search_bar_widget.da
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../state_holders/home_slider_controller.dart';
 import '../../state_holders/main_bottom_nav_controller.dart';
 import '../utility/image_assets.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<int> Wlisted = [];
+  // List<int> Wlisted = [];
   String searchValue = "";
   @override
   void initState() {
@@ -43,17 +44,21 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  void isChangeInWish(bool Reload) {
+    setState(() {});
+  }
+
   Future<void> _refreshData() async {
     await Get.find<ProductListController>().getWishList();
     if (mounted) {
       setState(() {
-        Wlisted = appListClass.wishlistProductIds;
+        //Wlisted = appListClass.wishlistProductIds;
       });
     }
   }
 
   bool isProductInWishlist(int productId) {
-    return Wlisted.contains(productId);
+    return appListClass.wishlistProductIds.contains(productId);
   }
 
   @override
@@ -93,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.call,
-              onTap: () {},
+              onTap: () {
+                //_launchCall();
+              },
             ),
             const SizedBox(
               width: 8,
@@ -286,4 +293,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  // _launchCall() async {
+  //   print("clicked");
+  //   const phoneNumber = 'tel:019000';
+  //   if (await canLaunch(phoneNumber)) {
+  //     await launch(phoneNumber);
+  //   } else {
+  //     print('Could not launch $phoneNumber');
+  //   }
+  // }
 }

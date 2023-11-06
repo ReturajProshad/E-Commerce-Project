@@ -1,15 +1,15 @@
 class ReviewModel {
   String? msg;
-  List<Data>? data;
+  List<ReviewData>? data;
 
   ReviewModel({this.msg, this.data});
 
   ReviewModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <ReviewData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(ReviewData.fromJson(v));
       });
     }
   }
@@ -24,7 +24,7 @@ class ReviewModel {
   }
 }
 
-class Data {
+class ReviewData {
   int? id;
   String? description;
   String? rating;
@@ -34,7 +34,7 @@ class Data {
   String? updatedAt;
   Profile? profile;
 
-  Data(
+  ReviewData(
       {this.id,
       this.description,
       this.rating,
@@ -44,7 +44,7 @@ class Data {
       this.updatedAt,
       this.profile});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  ReviewData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
     rating = json['rating'];

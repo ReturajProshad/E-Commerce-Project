@@ -46,16 +46,16 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text('Please complete your profile first'),
-                  SizedBox(
+                  const Text('Please complete your profile first'),
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Get.to(CompleteProfileScreen());
+                      Get.to(const CompleteProfileScreen());
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

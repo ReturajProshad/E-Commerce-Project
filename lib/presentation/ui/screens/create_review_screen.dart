@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import '../../../data/services/create_review_caller.dart';
 
 class CreateReviewScreen extends StatefulWidget {
-  const CreateReviewScreen({Key? key, required this.PRid}) : super(key: key);
+  CreateReviewScreen({Key? key, required this.PRid}) : super(key: key);
   final int PRid;
+
   @override
   // ignore: library_private_types_in_public_api
   _CreateReviewScreenState createState() => _CreateReviewScreenState();
@@ -14,6 +15,11 @@ class CreateReviewScreen extends StatefulWidget {
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
   final TextEditingController descriptionController = TextEditingController();
   int rating = 5;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
