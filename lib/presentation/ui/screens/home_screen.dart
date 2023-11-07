@@ -9,7 +9,6 @@ import 'package:crafty_bay_app/presentation/ui/widgets/home/search_bar_widget.da
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../state_holders/home_slider_controller.dart';
 import '../../state_holders/main_bottom_nav_controller.dart';
 import '../utility/image_assets.dart';

@@ -94,7 +94,17 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       final review = snapshot.data![index];
                       return ListTile(
                         leading: const Icon(Icons.person),
-                        title: Text(review.profile?.cusName ?? "No Name"),
+                        title: Row(
+                          children: [
+                            Text(review.profile?.cusName ?? "No Name"),
+                            Spacer(),
+                            Icon(
+                              Icons.star,
+                              color: Colors.blue,
+                            ),
+                            Text('(${review.rating!.toString() ?? "N/A"})')
+                          ],
+                        ),
                         subtitle: Text(review.description ?? "No Review"),
                       );
                     },

@@ -1,3 +1,4 @@
+import 'package:crafty_bay_app/presentation/ui/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,8 +70,13 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                     await createReview(description, productId, rating);
 
                 if (response.isSuccess) {
-                  Get.snackbar("Success", "Done");
-
+                  Get.snackbar("Success", "Successfully Added a Review");
+                  Get.offAll(
+                    ReviewScreen(
+                      Pid: productId,
+                    ),
+                    predicate: (route) => route.isFirst || route.isCurrent,
+                  );
                   final responseData = response.responseJson;
                   final reviewId = responseData!['data']['id'];
                 } else {
