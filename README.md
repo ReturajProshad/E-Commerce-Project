@@ -106,21 +106,37 @@ https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/0c270ada-f
 
 
 
+https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/475e62c5-5229-41db-8037-59fdd6b5debe
+
+
+
+
 <h3>Search bar</h3>
 
+
 https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/2383a7d4-1b74-488e-ab6b-927351ec1ae6
+
 
 <h2>App Overview</h2>
   <p>Here's a sneak peek at what the app looks like:</p>
 <h4>1.Overview</h4>
 
+
 ![Untitled-1](https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/7124c1ee-aa8e-44ee-b654-6de30b9b0d7c)
+
 
 <h4>2.Overview</h4>
 
 ![2](https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/4ff5ce2b-e38f-49ab-b13e-fee7d37caaaa)
 
-<h4>3.dark theme</h4>
+<h4>3.Review Updated Page</h4>
+
+
+![Review updated Screen](https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/da32ac54-79bd-4888-9a9b-fd67ffb04f71)
+
+
+<h4>4.dark theme</h4>
+
 
 ![3](https://github.com/ReturajProshad/E-Commerce-Project/assets/130851471/321884b0-ebaf-41e3-8c17-9fabd04f8938)
 
